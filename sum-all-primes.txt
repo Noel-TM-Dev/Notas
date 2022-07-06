@@ -1,0 +1,25 @@
+function sumPrimes(num) {
+    let sum=0;
+  function primo(index){
+      let contador = 0;
+      for(let j=1;j<=index; j++){
+          if(index%j == 0){
+             contador++;
+          }
+      }  
+    
+      if(contador <= 2){
+         sum += index;
+      }
+      
+  }
+
+  for(let i=1; i<=num; i++){
+        if(i > 1){
+           primo(i);
+        }
+   }
+  return sum;
+}
+
+sumPrimes(10);

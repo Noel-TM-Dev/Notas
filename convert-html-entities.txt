@@ -1,0 +1,38 @@
+function convertHTML(str) {
+
+  let string =str;
+
+  function HTMLencode(character){
+     console.log(character)
+     let encode;
+     switch(character){
+         case '<': 
+            encode ='&lt;';
+            break;
+         case '>':
+            encode = '&gt;';
+            break;
+         case '&':
+            encode = '&amp;';
+            break;
+         case '"':
+            encode = '&quot;';
+            break;
+         case "'":
+            encode = '&apos;';
+            break;
+     }
+
+     if(encode){    
+        string=string.replaceAll(character,encode);
+      }  
+  }
+
+  for(let i=0; i< str.length;i++){
+      HTMLencode(str[i]);
+  }
+   
+  return string;
+}
+
+console.log(convertHTML("<>"));

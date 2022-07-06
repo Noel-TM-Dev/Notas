@@ -1,0 +1,21 @@
+function fearNotLetter(str) {
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+  let letter='';
+  let inicio_index = alphabet.indexOf(str[0]);
+
+ for(let i=inicio_index;i < inicio_index+str.length;i++){
+
+  if(alphabet.indexOf(str[i-inicio_index]) != (inicio_index+(str.indexOf(str[i-inicio_index])))){
+      letter = alphabet[alphabet.indexOf(str[i-inicio_index])-1];
+      break;
+    }else{
+      letter = undefined;
+    }
+
+ }
+  
+  return letter;
+}
+
+console.log(fearNotLetter("bcdf"));
