@@ -89,8 +89,8 @@ Es un conjunto de imagenes de las cuales la imagen mas inferior es la distribuci
  
  Para crear un archivo DockerFile es necesario crearlo en la raiz del proyecto en el cual se escriben los siguientes comandos:
 
-```Docker
-   FROM node:18  //De que imagen se va a basar 
+```Dockerfile
+  FROM node:18  //De que imagen se va a basar 
    
   RUN mkdir -p /home/app //Crear carpeta en el SO de Docker p`ara guardar el proyecto
 
@@ -193,7 +193,7 @@ Para crear archivos en el caso de modo desarrollo para trabajar con dependencias
 
  > ### Crear archivo Dockerfile.dev
   
-  ```docker
+  ```Dockerfile
    FROM node:18  //De que imagen se va a basar 
    
    RUN npm i -g nodemon
