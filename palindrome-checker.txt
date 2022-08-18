@@ -1,0 +1,12 @@
+function palindrome(str) {
+
+  let reverse = str.split(/[^a-zA-Z0-9]*/i).reverse().join('');
+  let strFormat = str.match(/[a-zA-Z0-9]/ig).join('');
+  
+  if(strFormat.toLowerCase() === reverse.toLowerCase()){
+    return true
+  }
+
+  return false;
+}
+console.log(palindrome("My age is 0, 0 si ega ym."));
