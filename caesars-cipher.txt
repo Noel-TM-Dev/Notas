@@ -1,0 +1,26 @@
+function rot13(str) {
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";//26
+const alphabet2 = alphabet.toLowerCase();
+
+let cadena="";
+
+for (let i = 0; i < str.length; i++) {
+    
+          let index = alphabet.indexOf(str[i])+13;
+          if(alphabet.indexOf(str[i]) != -1){
+            if(index >= 26){
+              let cont = index-26;
+              cadena+=alphabet[cont];
+            }else{
+              cadena+=alphabet[index];
+            }
+          }else{
+             cadena+=str[i];
+          }
+  }
+
+  return cadena;
+}
+
+console.log(rot13("SERR CVMMN!"));

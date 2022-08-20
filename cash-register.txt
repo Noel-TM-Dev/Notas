@@ -1,0 +1,107 @@
+function checkCashRegister(price, cash, cid) {
+ 
+  let change=[];
+  let totalCid=0;
+  let res = {
+     status: "",
+     change:[]
+    }
+  let Units = {
+    "PENNY":0,
+    "NICKEL":0,
+    "DIME":0,
+    "QUARTER":0,
+    "ONE":0,
+    "FIVE":0,
+    "TEN":0,
+    "TWENTY":0,
+    "ONE_HUNDRED":0
+ }
+
+
+  let currentUnit ={};
+  cid.forEach((e)=>{  
+     let key = e[0];
+     let value = e[1];
+     totalCid +=e[1];
+     currentUnit[key]=value;
+  });
+
+
+  let cambio = cash-price;
+  
+ if(totalCid >= cambio){
+   
+   res.status = totalCid==cambio?"CLOSED":"OPEN";
+
+  while(cambio !=0){
+        if(parseFloat(cambio.toFixed(2)) >= 100  && currentUnit["ONE HUNDRED"]- 100 >= 0){
+           currentUnit["ONE HUNDRED"] -= 100;
+           Units.ONE_HUNDRED +=100;
+           cambio-=100;
+        }else if(parseFloat(cambio.toFixed(2)) >= 20 && currentUnit.TWENTY - 20 >= 0){
+            cambio-=20;   
+            currentUnit.TWENTY -= 20;
+            Units.TWENTY += 20;
+           
+        }else if(parseFloat(cambio.toFixed(2)) >= 10 && currentUnit.TEN - 10 >= 0 ){
+             cambio-=10;
+             currentUnit.TEN -= 10;
+             Units.TEN += 10;
+        }else if(parseFloat(cambio.toFixed(2)) >= 5 && currentUnit.FIVE - 5 >= 0){
+            currentUnit.FIVE -= 5;
+            cambio-=5;
+            Units.FIVE += 5;
+          
+        }else if(parseFloat(cambio.toFixed(2)) >= 1 && currentUnit.ONE - 1 >= 0){
+            cambio-=1;
+            currentUnit.ONE -= 1;
+            Units.ONE +=1; 
+           
+        }else if(parseFloat(cambio.toFixed(2)) >= 0.25  && currentUnit.QUARTER - 0.25 >= 0){
+           cambio-=0.25;
+           currentUnit.QUARTER -= 0.25;
+           Units.QUARTER+=0.25;
+        }else if(parseFloat(cambio.toFixed(2)) >= 0.1 && currentUnit.DIME - 0.1 >= 0){
+            cambio-=0.1;
+            currentUnit.DIME -= 0.1;
+            Units.DIME += 0.1;
+        }else if(parseFloat(cambio.toFixed(2)) >= 0.05 && currentUnit.NICKEL - 0.05 >= 0){
+           cambio-=0.05;
+           currentUnit.NICKEL -= 0.05;
+           Units.NICKEL += 0.05;
+        }else if(parseFloat(cambio.toFixed(2)) >= 0.01 && parseFloat(currentUnit.PENNY.toFixed(2)) - 0.01 >= 0){
+           cambio =parseFloat(cambio.toFixed(2))-0.01; 
+           currentUnit.PENNY -=0.01;
+           Units.PENNY += 0.01;
+        }else{
+           res.status ="INSUFFICIENT_FUNDS";
+           Units=null;
+           break;
+        }
+      
+  }
+
+   for(const property in Units){
+      if(Units[property]>0){ 
+        change.unshift([property=="ONE_HUNDRED"?"ONE HUNDRED":property,parseFloat(Units[property].toFixed(2))]);
+      }else{
+         if(res.status == "CLOSED"){
+ change.push([property=="ONE_HUNDRED"?"ONE HUNDRED":property,parseFloat(Units[property].toFixed(2))]);
+         }
+      }
+   }
+   res.change = change;
+  
+ }else{
+    res.status = "INSUFFICIENT_FUNDS"
+ }
+  
+  return res;
+}
+
+
+console.log("respuesta: \n",
+checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]
+));
+
